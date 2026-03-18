@@ -7,6 +7,7 @@ import { Menu01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -45,40 +46,45 @@ export function Header() {
           isScrolled ? "bg-black/40 backdrop-blur-2xl border border-white/10 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.3)]" : "bg-transparent py-0"
         )}>
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <img src="/LOGO-FINAL.png" alt="Logo" className="h-8 md:h-10 w-auto group-hover:scale-110 transition-transform duration-500" />
-            <span className="text-xl font-expressive text-white tracking-widest mt-1 hidden sm:block">nilxnjxn</span>
-          </Link>
+          <Magnetic strength={0.1}>
+            <Link href="/" className="flex items-center gap-3 group">
+              <img src="/LOGO-FINAL.png" alt="Logo" className="h-8 md:h-10 w-auto group-hover:scale-110 transition-transform duration-500" />
+              <span className="text-xl font-expressive text-white tracking-widest mt-1 hidden sm:block">nilxnjxn</span>
+            </Link>
+          </Magnetic>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link 
-                key={link.href} 
-                href={link.href}
-                className="relative text-xs uppercase tracking-widest font-functional transition-colors hover:text-white"
-              >
-                <span className={cn(
-                  "transition-colors",
-                  pathname === link.href ? "text-white" : "text-muted-foreground"
-                )}>
-                  {link.name}
-                </span>
-                {pathname === link.href && (
-                  <motion.div 
-                    layoutId="nav-underline"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-accent"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-              </Link>
+              <Magnetic key={link.href} strength={0.2}>
+                <Link 
+                  href={link.href}
+                  className="relative text-xs uppercase tracking-widest font-functional transition-colors hover:text-white py-2 px-1"
+                >
+                  <span className={cn(
+                    "transition-colors",
+                    pathname === link.href ? "text-white" : "text-muted-foreground"
+                  )}>
+                    {link.name}
+                  </span>
+                  {pathname === link.href && (
+                    <motion.div 
+                      layoutId="nav-underline"
+                      className="absolute -bottom-1 left-0 right-0 h-px bg-accent"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                </Link>
+              </Magnetic>
             ))}
-            <Link 
-              href="/store"
-              className="bg-white text-black px-6 py-2 rounded-full text-[10px] uppercase font-bold tracking-widest hover:scale-105 active:scale-95 transition-all shadow-lg shadow-white/10"
-            >
-              Store
-            </Link>
+            <Magnetic strength={0.3}>
+              <Link 
+                href="/store"
+                className="bg-white text-black px-6 py-2 rounded-full text-[10px] uppercase font-bold tracking-widest hover:scale-105 active:scale-95 transition-all shadow-lg shadow-white/10"
+              >
+                Store
+              </Link>
+            </Magnetic>
           </nav>
 
           {/* Mobile Menu Toggle */}

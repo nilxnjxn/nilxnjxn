@@ -101,6 +101,11 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html, body {
+    @apply overflow-x-hidden max-w-full;
+    width: 100%;
+    position: relative;
+  }
   body {
     @apply bg-background text-foreground antialiased;
     background-image: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);

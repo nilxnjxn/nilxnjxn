@@ -100,16 +100,26 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
-        <p className="text-muted-foreground text-[10px] uppercase tracking-widest font-light">
-          &copy; {new Date().getFullYear()} NILXNJXN RECORDINGS &copy; ALL RIGHTS RESERVED
-        </p>
-        <div className="flex items-center gap-2 text-muted-foreground text-[10px] uppercase tracking-widest font-light">
-          <span>IDENTITY BY</span>
-          <span className="text-white font-medium">NILXNJXN STUDIO</span>
-        </div>
-      </div>
+      {/* Bottom Row */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-white/5">
+            <div className="flex flex-col items-center md:items-start gap-1">
+              <p className="text-[10px] uppercase tracking-[0.4em] font-medium text-white/40">
+                &copy; 2026 NILXNJXN — All Rights Reserved
+              </p>
+              <div className="flex items-center gap-4 text-[9px] uppercase tracking-widest font-bold text-muted-foreground">
+                <Link href="/privacy" className="hover:text-accent transition-colors">Privacy</Link>
+                <div className="w-1 h-1 bg-white/10 rounded-full" />
+                <Link href="/terms" className="hover:text-accent transition-colors">Terms</Link>
+                <div className="w-1 h-1 bg-white/10 rounded-full" />
+                <button className="hover:text-accent transition-colors">Licensing</button>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] uppercase tracking-[0.2em] font-functional text-muted-foreground">Design by</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] font-functional text-white font-bold underline decoration-accent/30 underline-offset-4">Antigravity</span>
+            </div>
+          </div>
 
       {/* Noise Overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] animate-noise" style={{ backgroundImage: 'url("/noise.png")' }} />

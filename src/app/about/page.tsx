@@ -43,40 +43,63 @@ export default function AboutPage() {
         </motion.div>
 
         {/* Narrative Section */}
-        <section className="space-y-16">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="text-6xl md:text-8xl font-expressive text-white tracking-tighter"
-          >
-            The Paradox of <span className="text-accent underline decoration-1 underline-offset-8">Silence</span>
-          </motion.h1>
+        <section className="space-y-24">
+          <div className="space-y-6">
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-accent font-functional text-[10px] uppercase tracking-[0.5em] font-bold"
+            >
+              The Story Of Nila
+            </motion.p>
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="text-7xl md:text-[10rem] font-expressive text-white tracking-tighter leading-[0.8]"
+            >
+              Nilxnjxn
+            </motion.h1>
+          </div>
 
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-12 font-functional leading-relaxed"
+            className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 font-functional leading-relaxed"
           >
-            <div className="space-y-6">
-              <p className="text-lg text-white/90 font-light">
-                Nilxnjxn aka Nila, is an upcoming Hip-hop Artist from Assam, India. 
-                Guided by the motto <span className="text-accent italic">"LIVE FREE, BE YOU"</span>, 
-                he delivers a precise blend of catchy hooks and slick bars.
-              </p>
-              <p className="text-muted-foreground font-light">
-                With his debut EP <span className="text-white font-medium italic">"SHADES"</span> (dropping 2026), 
-                Nila explores the vast range of human emotion and behavior. Each track is released in 
-                specific seasons that mirror the mood of the sound.
+            <div className="space-y-12">
+              <div className="space-y-6">
+                 <p className="text-2xl text-white/90 font-light leading-snug">
+                  "LIVE FREE, BE YOU"
+                </p>
+                <p className="text-lg text-white/50 font-light">
+                  Nilxnjxn aka Nila, is an upcoming Hip-hop Artist from Assam, India. 
+                  With his <span className="font-expressive-alt text-3xl text-accent hidden md:inline ml-2">Catchy Hooks & Slick Bars</span>, 
+                  he intends to deliver a new wave to the existing rap scene.
+                </p>
+              </div>
+              
+              <p className="text-muted-foreground font-light text-base">
+                Debut EP <span className="text-white font-medium italic underline decoration-accent/30 underline-offset-8">"SHADES"</span> (Dropping 2026) 
+                explores the range of Human Emotion and Behavior, reflected through the seasons. 
+                3 SHADES — <span className="text-emerald-400">FRESH</span>; <span className="text-orange-400">AKAD</span>; <span className="text-cyan-400">LATE</span> — have already emerged.
               </p>
             </div>
-            <div className="space-y-6 bg-white/5 backdrop-blur-md p-8 rounded-[32px] border border-white/10 h-fit">
-              <h3 className="text-xs uppercase tracking-[0.2em] text-accent font-medium">Concept</h3>
-              <p className="text-sm text-muted-foreground font-light leading-relaxed">
-                "FRESH, AKAD, and LATE are just the beginning. I want to bring a new wave to the existing 
-                rap scene—if you fck with the sound, hop in for the journey of your life."
-              </p>
+
+            <div className="space-y-12">
+              <div className="space-y-6 bg-white/5 backdrop-blur-3xl p-10 md:p-16 rounded-[48px] border border-white/10 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-30 transition-opacity">
+                   <HugeiconsIcon icon={ArrowLeftIcon} size={80} className="rotate-180" />
+                </div>
+                <h3 className="text-[10px] uppercase tracking-[0.4em] text-accent font-bold">What's Next?</h3>
+                <p className="text-lg text-white/80 font-light leading-relaxed relative z-10">
+                  "If you fck with the motto, sound or concept—hop in for the journey of your life. We are mapping the shadows together."
+                </p>
+                <div className="pt-4">
+                   <span className="font-expressive text-4xl text-white/20">- Nila</span>
+                </div>
+              </div>
             </div>
           </motion.div>
 

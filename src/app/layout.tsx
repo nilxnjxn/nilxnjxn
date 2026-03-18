@@ -78,6 +78,8 @@ const jsonLd = {
   "knowsAbout": ["Music Production", "Songwriting", "Sound Design"]
 };
 
+import { PageTransition } from "@/components/layout/PageTransition";
+
 export default function RootLayout({
   children,
 }: {
@@ -86,17 +88,21 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${functional.variable} ${expressive.variable} ${expressiveAlt.variable} dark`}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="antialiased bg-background text-foreground min-h-screen selection:bg-accent selection:text-black flex flex-col uppercase">
+      <body className="antialiased bg-background text-foreground min-h-screen selection:bg-accent selection:text-black flex flex-col uppercase overflow-x-hidden">
         <SmoothScroll>
           <Header />
-          <div className="flex-1">
-            {children}
-          </div>
+          <PageTransition>
+            <main className="flex-1 min-h-[calc(100vh-80px)]">
+              {children}
+            </main>
+          </PageTransition>
           <Footer />
           <WaveformPlayer />
           <CursorFollower />

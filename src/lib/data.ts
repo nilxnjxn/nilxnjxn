@@ -10,6 +10,7 @@ export interface Track {
   price: string;
   duration?: string;
   slug?: string;
+  season?: "FRESH" | "AKAD" | "LATE";
 }
 
 export async function getTracks(): Promise<Track[]> {
@@ -20,6 +21,8 @@ export async function getTracks(): Promise<Track[]> {
   } catch (err) {
     console.error("Error reading cover-arts directory", err);
   }
+
+  const seasons: ("FRESH" | "AKAD" | "LATE")[] = ["FRESH", "AKAD", "LATE"];
 
   return files.map((file, i) => {
     // Basic title formatting: remove extension and "-COVER"
@@ -35,6 +38,7 @@ export async function getTracks(): Promise<Track[]> {
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // Demo audio
       price: "₹150",
       slug: rawTitle.toLowerCase(),
+      season: seasons[i % 3],
     };
   });
 }

@@ -1,10 +1,15 @@
+"use client";
+
 import { useRef, useLayoutEffect } from "react";
 import { Track } from "@/lib/data";
 import { useAudioStore } from "@/store/audioStore";
 import { PlayIcon, PauseIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { gsap } from "gsap";
+import { cn } from "@/lib/utils";
+import { Magnetic } from "@/components/ui/Magnetic";
+import { LazyImage } from "@/components/ui/LazyImage";
+import Link from "next/link";
 
 interface TrackCardProps {
   track: Track;
@@ -13,26 +18,27 @@ interface TrackCardProps {
 export function TrackCard({ track }: TrackCardProps) {
   const { currentTrack, isPlaying, playTrack, togglePlayPause } = useAudioStore();
   const cardRef = useRef<HTMLDivElement>(null);
-  const priceRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+
   const isCurrent = currentTrack?.id === track.id;
   const isActive = isCurrent && isPlaying;
 
   useLayoutEffect(() => {
-    if (!cardRef.current || !priceRef.current) return;
+    if (!cardRef.current || !infoRef.current) return;
 
-    const price = priceRef.current;
+    const info = infoRef.current;
     
     const ctx = gsap.context(() => {
-      // Magnetic effect for price tag within card
-      const xTo = gsap.quickTo(price, "x", { duration: 0.6, ease: "power3" });
-      const yTo = gsap.quickTo(price, "y", { duration: 0.6, ease: "power3" });
+      // Subtle parallax for info within card
+      const xTo = gsap.quickTo(info, "x", { duration: 0.8, ease: "power3.out" });
+      const yTo = gsap.quickTo(info, "y", { duration: 0.8, ease: "power3.out" });
 
       const onMouseMove = (e: MouseEvent) => {
         const { left, top, width, height } = cardRef.current!.getBoundingClientRect();
         const centerX = left + width / 2;
         const centerY = top + height / 2;
-        const moveX = (e.clientX - centerX) * 0.15;
-        const moveY = (e.clientY - centerY) * 0.15;
+        const moveX = (e.clientX - centerX) * 0.1;
+        const moveY = (e.clientY - centerY) * 0.1;
         xTo(moveX);
         yTo(moveY);
       };
@@ -55,6 +61,7 @@ export function TrackCard({ track }: TrackCardProps) {
   }, []);
 
   const handlePlayClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     e.stopPropagation();
     if (isCurrent) {
       togglePlayPause();
@@ -64,69 +71,65 @@ export function TrackCard({ track }: TrackCardProps) {
   };
 
   return (
-    <CardContainer containerClassName="py-4 px-2" className="group">
-      <div ref={cardRef}>
-        <CardBody className="relative bg-white/5 border border-white/10 w-72 h-auto rounded-[20px] p-4 group-hover:bg-white/8 transition-all duration-500 overflow-hidden">
-          {/* Glass Shine Effect */}
-          <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-linear-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
+    <Magnetic strength={0.1}>
+      <Link 
+        href={`/music/${track.slug}`}
+        className="block group relative"
+      >
+        <div 
+          ref={cardRef}
+          className="track-card relative w-full max-w-[320px] aspect-square rounded-[32px] md:rounded-[40px] overflow-hidden bg-white/5 border border-white/10 group shadow-2xl transition-all duration-700 hover:shadow-accent/10 play-trigger"
+        >
+          {/* Performance Optimized Artwork */}
+          <LazyImage 
+             src={track.coverUrl} 
+             alt={track.title} 
+             className="transition-transform duration-1000 group-hover:scale-110" 
+          />
           
-          {/* Cover Art Image */}
-          <CardItem
-            translateZ="60"
-            className="w-full aspect-square rounded-[16px] overflow-hidden relative mb-4"
-          >
-            <img 
-              src={track.coverUrl} 
-              alt={track.title}
-              className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105"
-              loading="lazy"
-            />
-            
-            {/* Audio Interaction Overlay */}
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center backdrop-blur-xs">
-              <button 
-                onClick={handlePlayClick}
-                className="w-16 h-16 bg-white text-black rounded-full shadow-[0_0_30px_rgba(255,255,255,0.3)] flex items-center justify-center scale-90 group-hover:scale-100 transition-transform duration-300 active:scale-95"
-              >
-                <HugeiconsIcon icon={isActive ? PauseIcon : PlayIcon} size={24} color="currentColor" />
-              </button>
-            </div>
-
-            {/* Price Tag Overlay - Upgraded */}
-            <CardItem
-              as="div"
-              translateZ="80"
-              className="absolute top-3 right-3 z-20"
+          {/* Hover Overlay: Play State */}
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-sm">
+            <button 
+              onClick={handlePlayClick}
+              className="w-20 h-20 bg-white text-black rounded-full shadow-2xl flex items-center justify-center scale-75 group-hover:scale-100 transition-all duration-500 active:scale-90 hover:bg-accent"
             >
-              <div 
-                ref={priceRef}
-                className="bg-black/80 backdrop-blur-lg px-4 py-1.5 rounded-full border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center gap-1.5"
-              >
-                <div className="w-1 h-1 bg-accent rounded-full animate-pulse" />
-                <span className="text-[10px] font-functional font-bold text-white tracking-[0.2em] uppercase">
-                  {track.price}
-                </span>
-              </div>
-            </CardItem>
-          </CardItem>
-
-          {/* Metadata */}
-          <div className="space-y-1">
-            <CardItem
-              translateZ="40"
-              className="text-white font-functional font-medium truncate text-sm"
-            >
-              {track.title}
-            </CardItem>
-            <CardItem
-              translateZ="20"
-              className="text-muted-foreground font-functional text-[10px] uppercase tracking-[0.2em] font-light italic truncate"
-            >
-              {track.artist}
-            </CardItem>
+              <HugeiconsIcon icon={isActive ? PauseIcon : PlayIcon} size={32} color="currentColor" />
+            </button>
           </div>
-        </CardBody>
-      </div>
-    </CardContainer>
+
+          {/* Seasonal Badge */}
+          <div className="absolute top-6 right-6 z-20">
+            <div className={cn(
+              "px-4 py-1.5 rounded-full text-[9px] uppercase tracking-[0.3em] font-bold backdrop-blur-xl border border-white/10 shadow-2xl",
+              track.season === 'FRESH' && "text-emerald-400 bg-emerald-500/10",
+              track.season === 'AKAD' && "text-orange-400 bg-orange-500/10",
+              track.season === 'LATE' && "text-cyan-400 bg-cyan-500/10"
+            )}>
+              {track.season}
+            </div>
+          </div>
+
+          {/* Content Overlay: Title / Artist */}
+          <div 
+            ref={infoRef}
+            className="absolute bottom-8 left-8 right-8 z-20 space-y-1 pointer-events-none transition-transform duration-700"
+          >
+            <h3 className="text-white font-functional font-bold text-lg tracking-tight drop-shadow-md truncate">
+              {track.title}
+            </h3>
+            <p className="text-white/40 font-functional text-[10px] uppercase tracking-[0.3em] font-medium truncate">
+              {track.artist}
+            </p>
+          </div>
+
+          {/* Price Floating Tag */}
+          <div className="absolute bottom-8 right-8 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+             <div className="bg-black/90 px-3 py-1 rounded-full border border-white/10 text-[9px] font-bold text-accent tracking-widest">
+               {track.price}
+             </div>
+          </div>
+        </div>
+      </Link>
+    </Magnetic>
   );
 }

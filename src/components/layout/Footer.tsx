@@ -30,9 +30,9 @@ export function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24 uppercase">
         {/* Brand Column */}
         <div className="space-y-6">
-          <Link href="/" className="flex items-center gap-3 group">
-            <img src="/LOGO-FINAL.png" alt="Logo" className="h-10 w-auto opacity-80 group-hover:opacity-100 transition-opacity" />
-            <span className="text-2xl font-expressive text-white tracking-widest mt-1">nilxnjxn</span>
+          <Link href="/" className="flex flex-col items-start gap-4 group">
+            <img src="/LOGO-FINAL.png" alt="Logo" className="h-16 w-auto opacity-90 group-hover:opacity-100 transition-opacity" />
+            <span className="text-base font-expressive text-white tracking-[0.4em] mt-1 px-1">nilxnjxn</span>
           </Link>
           <p className="text-muted-foreground font-functional text-sm leading-relaxed font-light max-w-xs lowercase">
             Upcoming Hip-hop Artist from Assam, India. "LIVE FREE, BE YOU". 

@@ -47,9 +47,9 @@ export function Header() {
         )}>
           {/* Logo */}
           <Magnetic strength={0.1}>
-            <Link href="/" className="flex items-center gap-3 group">
-              <img src="/LOGO-FINAL.png" alt="Logo" className="h-8 md:h-10 w-auto group-hover:scale-110 transition-transform duration-500" />
-              <span className="text-xl font-expressive text-white tracking-widest mt-1 hidden sm:block">nilxnjxn</span>
+            <Link href="/" className="flex items-center gap-4 group">
+              <img src="/LOGO-FINAL.png" alt="Logo" className="h-10 md:h-12 w-auto group-hover:scale-105 transition-transform duration-500" />
+              <span className="text-xs md:text-sm font-expressive text-white tracking-[0.3em] mt-1 hidden sm:block">nilxnjxn</span>
             </Link>
           </Magnetic>
 

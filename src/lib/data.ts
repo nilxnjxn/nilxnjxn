@@ -34,12 +34,16 @@ export async function getTracks(): Promise<Track[]> {
     else if (upperFile.includes("AKAD")) season = "AKAD";
     else if (upperFile.includes("LATE")) season = "LATE";
 
+    const audioUrl = fs.existsSync(path.join(process.cwd(), "public", "preview", `${rawTitle.toLowerCase()}.m4a`))
+      ? `/preview/${rawTitle.toLowerCase()}.m4a`
+      : "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+
     return {
       id: `trk_${i}`,
       title,
       artist: "NILXNJXN",
       coverUrl: `/cover-arts/${file}`,
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      audioUrl,
       price: "₹150",
       slug: rawTitle.toLowerCase(),
       season,

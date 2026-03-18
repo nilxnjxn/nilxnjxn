@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect, useEffect } from "react";
 import { Track } from "@/lib/data";
+import { useAudioStore } from "@/store/audioStore";
 import { HeroPlayer } from "@/components/player/HeroPlayer";
 import { TrackCard } from "@/components/player/TrackCard";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,12 +18,19 @@ interface HomeClientProps {
 }
 
 export function HomeClient({ tracks }: HomeClientProps) {
+  const { currentTrack, setTrack } = useAudioStore();
   const [hasInteracted, setHasInteracted] = useState(false);
   const narrativeRef = useRef<HTMLDivElement>(null);
 
-  // Use first track for Hero, others for Latest Releases
-  const featuredTrack = tracks[0];
-  const otherTracks = tracks.slice(1);
+  // Use AKAD track for Hero, others for Latest Releases
+  const featuredTrack = tracks.find(t => t.title.toUpperCase() === "AKAD") || tracks[0];
+  const otherTracks = tracks.filter(t => t.id !== featuredTrack.id);
+
+  useEffect(() => {
+    if (!currentTrack && featuredTrack) {
+      setTrack(featuredTrack);
+    }
+  }, [featuredTrack, currentTrack, setTrack]);
 
   const handleInteraction = () => {
     setHasInteracted(true);

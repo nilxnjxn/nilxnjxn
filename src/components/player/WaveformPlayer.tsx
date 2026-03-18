@@ -21,13 +21,13 @@ export function WaveformPlayer() {
 
     wavesurferRef.current = WaveSurfer.create({
       container: containerRef.current,
-      waveColor: "rgba(255, 255, 255, 0.05)",
-      progressColor: "rgba(34, 211, 238, 0.8)",
-      cursorColor: "rgba(34, 211, 238, 0.4)",
+      waveColor: "rgba(255, 255, 255, 0.2)",
+      progressColor: "rgba(34, 211, 238, 1)",
+      cursorColor: "rgba(34, 211, 238, 0.8)",
       barWidth: 2,
       barGap: 4,
       barRadius: 10,
-      height: 24,
+      height: 32,
       normalize: true,
       fillParent: true,
       url: currentTrack.audioUrl || "", 
@@ -124,7 +124,7 @@ export function WaveformPlayer() {
 
         {/* Waveform Visualization - Responsive Heights */}
         <div className="flex-1 flex flex-col justify-center gap-1 md:gap-2 pt-1 md:pt-2 px-4">
-          <div className="w-full h-4 md:h-6 opacity-60" ref={containerRef} />
+          <div className="w-full h-8 md:h-10" ref={containerRef} />
           <div className="flex justify-between items-center px-1">
             <span className="text-[7px] md:text-[8px] font-functional text-white/30 font-bold tracking-widest uppercase">{formatTime(currentTime)}</span>
             <div className="flex-1 mx-4 h-px bg-white/5" />

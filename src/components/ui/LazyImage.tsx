@@ -25,22 +25,18 @@ export function LazyImage({
 
   return (
     <div className={cn('relative overflow-hidden', aspectRatio, className)}>
+      {/* Skeleton placeholder behind the image */}
       {!isLoaded && !error && <Skeleton className="absolute inset-0 z-10" />}
 
       <Image
         src={src}
         alt={alt}
         fill
-        className={cn(
-          'object-cover transition-all duration-1000 ease-out',
-          isLoaded
-            ? 'blur-0 scale-100 opacity-100 grayscale-0'
-            : 'scale-110 opacity-0 blur-xl grayscale-100',
-        )}
+        sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, 340px"
+        className="object-cover"
         onLoad={() => setIsLoaded(true)}
         onError={() => setError(true)}
         priority={priority}
-        loading={priority ? undefined : 'lazy'}
       />
 
       {error && (

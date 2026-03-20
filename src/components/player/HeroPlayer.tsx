@@ -183,15 +183,22 @@ export function HeroPlayer({ track, onPlay, hasInteracted }: HeroPlayerProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="w-full max-w-[320px] px-6 pt-4 md:max-w-none"
+            className="flex w-full flex-col items-center gap-6 px-6 pt-4 md:max-w-none"
           >
+            {/* Mobile Only Price Tag */}
+            <div className="bg-accent/10 border-accent/20 flex items-center gap-2 rounded-full border px-4 py-2 backdrop-blur-xl shadow-[0_0_20px_rgba(34,211,238,0.1)] md:hidden">
+              <span className="text-accent text-[10px] font-bold tracking-[0.2em]">
+                {track.price}
+              </span>
+            </div>
+
             <Magnetic strength={0.2}>
               <Button
                 variant="outline"
                 size="lg"
-                className="cta-reveal font-functional w-full rounded-full border-white/20 bg-transparent px-8 py-6 text-sm tracking-widest text-white uppercase shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all hover:bg-white hover:text-black md:w-auto md:text-base"
+                className="cta-reveal font-functional w-full rounded-full border-white/20 bg-transparent px-8 py-6 text-sm tracking-widest text-white uppercase shadow-[0_0_40px_rgba(34,211,238,0.15)] transition-all hover:bg-white hover:text-black md:w-auto md:text-base lg:px-12"
               >
-                Get Access — <span className="text-accent ml-2">{track.price}</span>
+                Get Access<span className="md:hidden"> — <span className="text-accent">{track.price}</span></span>
               </Button>
             </Magnetic>
           </motion.div>

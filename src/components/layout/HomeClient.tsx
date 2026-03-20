@@ -25,7 +25,7 @@ export function HomeClient({ tracks }: HomeClientProps) {
 
   // Use AKAD track for Hero, others for Latest Releases
   const featuredTrack = tracks.find((t) => t.title.toUpperCase() === 'AKAD') || tracks[0];
-  const otherTracks = featuredTrack ? tracks.filter((t) => t.id !== featuredTrack.id) : tracks;
+  const otherTracks = tracks;
 
   useEffect(() => {
     if (!currentTrack && featuredTrack) {
@@ -144,7 +144,7 @@ export function HomeClient({ tracks }: HomeClientProps) {
 
                   <div className="no-scrollbar scrollbar-hide -mx-6 flex snap-x snap-mandatory gap-8 overflow-x-auto px-6 pb-12">
                     {otherTracks.map((track) => (
-                      <div key={track.id} className="snap-center">
+                      <div key={track.id} className="flex-none snap-center">
                         <TrackCard track={track} />
                       </div>
                     ))}

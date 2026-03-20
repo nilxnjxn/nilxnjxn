@@ -76,7 +76,7 @@ export function TrackCard({ track, priority = false }: TrackCardProps) {
       <Link href={`/music/${track.slug}`} className="group relative block py-4">
         <div
           ref={cardRef}
-          className="track-card group play-trigger relative aspect-square w-full max-w-[340px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl transition-all duration-700 hover:scale-[1.05] hover:border-white/30 hover:shadow-cyan-500/20"
+          className="track-card group play-trigger relative aspect-square w-[280px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl transition-all duration-700 hover:scale-[1.05] hover:border-white/30 hover:shadow-cyan-500/20 sm:w-[320px] md:w-[340px]"
         >
           {/* Performance Optimized Artwork */}
           <LazyImage
@@ -128,9 +128,11 @@ export function TrackCard({ track, priority = false }: TrackCardProps) {
           </div>
 
           {/* Price Floating Tag */}
-          <div className="absolute right-8 bottom-8 z-30 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-            <div className="text-accent rounded-full border border-white/10 bg-black/90 px-3 py-1 text-[9px] font-bold tracking-widest">
-              {track.price}
+          <div className="absolute right-6 bottom-6 z-30 opacity-0 transition-all duration-500 group-hover:opacity-100">
+            <div className="border-accent/20 bg-accent/10 rounded-full border px-4 py-2 backdrop-blur-xl shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+              <span className="text-accent text-[10px] font-bold tracking-[0.2em]">
+                {track.price}
+              </span>
             </div>
           </div>
         </div>

@@ -5,7 +5,6 @@ import { Track } from '@/lib/data';
 import { TrackCard } from '@/components/player/TrackCard';
 import { ShoppingCart01Icon, SecurityCheckIcon, ZapIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Magnetic } from '@/components/ui/Magnetic';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -58,17 +57,13 @@ export function StoreClient({ tracks }: StoreClientProps) {
         </div>
 
         {/* Store Grid - Responsive Spacing */}
-        <div className="grid grid-cols-1 justify-items-center gap-12 sm:grid-cols-2 md:gap-16 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 justify-items-center gap-16 sm:grid-cols-2 md:gap-20 lg:grid-cols-3">
           {tracks.map((track) => (
-            <div key={track.id} className="group flex w-full flex-col items-center space-y-6">
+            <div key={track.id} className="group flex w-full max-w-[340px] flex-col items-center space-y-8">
               <TrackCard track={track} />
-              <div className="w-full max-w-[320px] px-4">
-                <Magnetic strength={0.1}>
-                  <button className="w-full rounded-full border border-white/10 bg-white/5 py-4 text-[10px] font-bold tracking-[0.3em] text-white uppercase shadow-xl transition-all hover:bg-white hover:text-black active:scale-95">
-                    Get Shade — {track.price}
-                  </button>
-                </Magnetic>
-              </div>
+              <button className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-[10px] font-bold tracking-[0.3em] text-white uppercase shadow-xl transition-all hover:border-white/30 hover:bg-white hover:text-black active:scale-95">
+                Get Shade — {track.price}
+              </button>
             </div>
           ))}
         </div>

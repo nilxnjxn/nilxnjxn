@@ -29,8 +29,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # 2. Clone the remote FORK repository using the PAT for authentication
-          git clone https://x-access-token:${GH_TOKEN}@github.com/${FORK_REPO}.git target-fork
+          # 2. Clone the remote FORK repository using the PAT directly for authentication
+          git clone https://${GH_TOKEN}@github.com/${FORK_REPO}.git target-fork
           cd target-fork
 
           # 3. Add THIS main repository as the "upstream" remote
@@ -45,8 +45,8 @@ jobs:
           # We use --allow-unrelated-histories just in case git histories diverged slightly
           git merge upstream/${TARGET_BRANCH} --allow-unrelated-histories -m "chore: automated sync from upstream"
 
-          # 6. Push the new sync branch up to the target fork repository
-          git push origin $SYNC_BRANCH
+          # 6. Push the new sync branch up to the target fork repository explicitly
+          git push https://${GH_TOKEN}@github.com/${FORK_REPO}.git $SYNC_BRANCH
 
           # 7. Create a Pull Request in the fork repository using the GitHub CLI
           echo "Creating Pull Request on $FORK_REPO..."

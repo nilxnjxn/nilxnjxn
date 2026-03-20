@@ -82,7 +82,7 @@ export function Footer() {
       <div className="mx-auto mb-24 grid max-w-7xl grid-cols-1 gap-12 uppercase md:grid-cols-2 lg:grid-cols-4">
         {/* Brand Column */}
         <div className="space-y-6">
-          <Link href="/" className="group flex flex-col items-start gap-4">
+          <Link href="/" className="group flex flex-col items-center gap-4">
             <Image
               src="/LOGO-FINAL.png"
               alt="Logo"
@@ -183,7 +183,7 @@ export function Footer() {
       <div className="flex flex-col items-center justify-between gap-8 border-t border-white/5 pt-12 md:flex-row">
         <div className="flex flex-col items-center gap-1 md:items-start">
           <p className="text-[10px] font-medium tracking-[0.4em] text-white/40 uppercase">
-            &copy; 2026 NILXNJXN
+            &copy; {new Date().getFullYear()} NILXNJXN
           </p>
           <div className="text-muted-foreground flex items-center gap-4 text-[9px] font-bold tracking-widest uppercase">
             <Link href="/privacy" className="hover:text-accent transition-colors">

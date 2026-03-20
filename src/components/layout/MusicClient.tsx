@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useLayoutEffect, useMemo } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { Track } from '@/lib/data';
 import { TrackCard } from '@/components/player/TrackCard';
 import { Search01Icon } from '@hugeicons/core-free-icons';
@@ -11,6 +11,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 import { Magnetic } from '@/components/ui/Magnetic';
 import Image from 'next/image';
+import { LiveShowsSection } from '@/components/layout/LiveShowsSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,33 +36,7 @@ export function MusicClient({ tracks }: MusicClientProps) {
     });
   }, [tracks, searchQuery, filter]);
 
-  useLayoutEffect(() => {
-    if (!gridRef.current) return;
 
-    const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray('.track-item');
-      if (items.length === 0) return;
-
-      gsap.from(items, {
-        opacity: 0,
-        y: 40,
-        scale: 0.95,
-        duration: 0.8,
-        stagger: 0.05,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: 'top 85%',
-          once: true,
-        },
-      });
-    }, gridRef);
-
-    return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach((st) => st.kill());
-    };
-  }, [filteredTracks.length]);
 
   return (
     <main className="bg-background selection:bg-accent min-h-screen px-6 pt-32 pb-32 selection:text-black">
@@ -83,24 +58,22 @@ export function MusicClient({ tracks }: MusicClientProps) {
 
           {/* Filters & Search - Fully Responsive */}
           <div className="flex flex-col justify-between gap-8 md:gap-12 lg:flex-row lg:items-center">
-            <div className="scrollbar-hide -mx-6 w-full overflow-x-auto px-6 pb-4 lg:mx-0 lg:w-auto lg:px-0 lg:pb-0">
-              <div className="flex min-w-max items-center gap-3">
-                {(['ALL', 'FRESH', 'AKAD', 'LATE'] as const).map((mood) => (
-                  <Magnetic key={mood} strength={0.2}>
-                    <button
-                      onClick={() => setFilter(mood)}
-                      className={cn(
-                        'font-functional rounded-full border px-10 py-4 text-[10px] font-bold tracking-[0.3em] uppercase transition-all duration-500',
-                        filter === mood
-                          ? 'scale-105 border-white bg-white text-black shadow-[0_10px_30px_rgba(255,255,255,0.2)]'
-                          : 'border-white/10 bg-white/5 text-white/40 hover:border-white/40 hover:bg-white/10 hover:text-white hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] active:scale-95',
-                      )}
-                    >
-                      {mood}
-                    </button>
-                  </Magnetic>
-                ))}
-              </div>
+            <div className="flex w-full flex-wrap items-center gap-2 sm:gap-3 lg:w-auto">
+              {(['ALL', 'FRESH', 'AKAD', 'LATE'] as const).map((mood) => (
+                <Magnetic key={mood} strength={0.2}>
+                  <button
+                    onClick={() => setFilter(mood)}
+                    className={cn(
+                      'font-functional rounded-full border px-6 py-3 text-[9px] font-bold tracking-[0.3em] uppercase transition-all duration-500 sm:px-10 sm:py-4 sm:text-[10px]',
+                      filter === mood
+                        ? 'scale-105 border-white bg-white text-black shadow-[0_10px_30px_rgba(255,255,255,0.2)]'
+                        : 'border-white/10 bg-white/5 text-white/40 hover:border-white/40 hover:bg-white/10 hover:text-white hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] active:scale-95',
+                    )}
+                  >
+                    {mood}
+                  </button>
+                </Magnetic>
+              ))}
             </div>
 
             <div className="group relative w-full lg:max-w-md">
@@ -118,10 +91,10 @@ export function MusicClient({ tracks }: MusicClientProps) {
           </div>
         </div>
 
-        {/* Dynamic Grid */}
+        {/* Dynamic List (Flex Wrap for strict fixed widths) */}
         <div
           ref={gridRef}
-          className="grid min-h-[400px] grid-cols-1 justify-items-center gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-3 xl:grid-cols-4"
+          className="flex min-h-[400px] flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 xl:gap-12"
         >
           {filteredTracks.length > 0 ? (
             filteredTracks.map((track, i) => (
@@ -130,7 +103,7 @@ export function MusicClient({ tracks }: MusicClientProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="track-item flex w-full justify-center"
+                className="track-item flex justify-center"
               >
                 <TrackCard track={track} />
               </motion.div>
@@ -147,6 +120,9 @@ export function MusicClient({ tracks }: MusicClientProps) {
           )}
         </div>
       </div>
+
+      {/* Live Shows Section */}
+      <LiveShowsSection />
 
       {/* Global Grain Overlay */}
       <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.04] mix-blend-overlay">

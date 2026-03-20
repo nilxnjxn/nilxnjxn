@@ -7,6 +7,7 @@ interface AudioState {
   volume: number;
   duration: number;
   currentTime: number;
+  hasInteracted: boolean;
 
   // Actions
   playTrack: (track: Track) => void;
@@ -15,6 +16,7 @@ interface AudioState {
   setVolume: (volume: number) => void;
   updateProgress: (currentTime: number, duration: number) => void;
   clearTrack: () => void;
+  setHasInteracted: (interacted: boolean) => void;
 }
 
 export const useAudioStore = create<AudioState>((set) => ({
@@ -23,6 +25,7 @@ export const useAudioStore = create<AudioState>((set) => ({
   volume: 1,
   duration: 0,
   currentTime: 0,
+  hasInteracted: false,
 
   playTrack: (track) => set({ currentTrack: track, isPlaying: true }),
   setTrack: (track) => set({ currentTrack: track, isPlaying: false }),
@@ -30,4 +33,5 @@ export const useAudioStore = create<AudioState>((set) => ({
   setVolume: (volume) => set({ volume }),
   updateProgress: (currentTime, duration) => set({ currentTime, duration }),
   clearTrack: () => set({ currentTrack: null, isPlaying: false, currentTime: 0, duration: 0 }),
+  setHasInteracted: (interacted) => set({ hasInteracted: interacted }),
 }));

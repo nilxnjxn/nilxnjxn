@@ -72,6 +72,13 @@ export function HeroPlayer({ track, onPlay, hasInteracted }: HeroPlayerProps) {
       ref={containerRef}
       className="relative flex h-screen flex-col items-center justify-center overflow-hidden"
     >
+      {/* 
+        PRELOADING TRICK: 
+        This hidden audio tag forces the browser to pre-fetch the initial HTTP byte-range chunks 
+        of the song (usually 5-10s) into memory while the user is reading the landing page. 
+        When Wavesurfer (MediaElement backend) asks for the same URL on play, it hits the cache = Instant Play.
+      */}
+      <audio preload="auto" src={track.audioUrl} className="hidden" />
       {/* Background Visuals */}
       <div
         ref={bgRef}

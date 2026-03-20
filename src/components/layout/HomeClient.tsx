@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useLayoutEffect, useEffect } from 'react';
+import { useRef, useLayoutEffect, useEffect } from 'react';
 import { Track } from '@/lib/data';
 import { useAudioStore } from '@/store/audioStore';
 import { HeroPlayer } from '@/components/player/HeroPlayer';
@@ -19,8 +19,7 @@ interface HomeClientProps {
 }
 
 export function HomeClient({ tracks }: HomeClientProps) {
-  const { currentTrack, setTrack } = useAudioStore();
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const { currentTrack, setTrack, hasInteracted, setHasInteracted } = useAudioStore();
   const narrativeRef = useRef<HTMLDivElement>(null);
 
   // Use AKAD track for Hero, others for Latest Releases
@@ -40,22 +39,27 @@ export function HomeClient({ tracks }: HomeClientProps) {
   useLayoutEffect(() => {
     if (!hasInteracted || !narrativeRef.current) return;
 
-    const ctx = gsap.context(() => {
-      // Cinematic text reveal
-      gsap.from('.shade-title', {
-        opacity: 0,
-        y: 100,
-        duration: 1.5,
-        stagger: 0.3,
-        ease: 'expo.out',
-        scrollTrigger: {
-          trigger: narrativeRef.current,
-          start: 'top 70%',
-        },
-      });
-    }, narrativeRef);
+    // Small delay to ensure DOM is ready and hero animation has finished
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        // Cinematic text reveal
+        gsap.from('.shade-title', {
+          opacity: 0,
+          y: 100,
+          duration: 1.5,
+          stagger: 0.3,
+          ease: 'expo.out',
+          scrollTrigger: {
+            trigger: narrativeRef.current,
+            start: 'top 70%',
+          },
+        });
+      }, narrativeRef);
 
-    return () => ctx.revert();
+      return () => ctx.revert();
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [hasInteracted]);
 
   return (

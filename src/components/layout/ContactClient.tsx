@@ -49,7 +49,7 @@ export function ContactClient() {
           className: 'font-functional text-xs font-bold tracking-widest uppercase',
         });
       }
-    } catch (err) {
+    } catch {
       toast.error('An unexpected error occurred.', {
         className: 'font-functional text-xs font-bold tracking-widest uppercase',
       });
@@ -103,7 +103,7 @@ export function ContactClient() {
       <section className="relative z-10 px-6 pb-24">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-start gap-20 lg:flex-row lg:justify-between lg:gap-32">
-            
+
             {/* Form Container - Far Left */}
             <div className="w-full max-w-xl">
               <motion.div

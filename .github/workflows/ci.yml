@@ -8,6 +8,7 @@ on:
 
 jobs:
   sync-to-fork:
+    if: github.repository == 'sddion/nilxnjxn'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Main Repository

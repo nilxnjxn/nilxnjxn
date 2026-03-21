@@ -7,6 +7,7 @@ import { PlayIcon, PauseIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { gsap } from 'gsap';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 import { Magnetic } from '@/components/ui/Magnetic';
 import { LazyImage } from '@/components/ui/LazyImage';
 import Link from 'next/link';
@@ -74,8 +75,10 @@ export function TrackCard({ track, priority = false }: TrackCardProps) {
   return (
     <Magnetic strength={0.1}>
       <Link href={`/music/${track.slug}`} className="group relative block py-4">
-        <div
+        <motion.div
           ref={cardRef}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
           className="track-card group play-trigger relative aspect-square w-[280px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl transition-all duration-700 hover:scale-[1.05] hover:border-white/30 hover:shadow-cyan-500/20 sm:w-[320px] md:w-[340px]"
         >
           {/* Performance Optimized Artwork */}
@@ -135,7 +138,7 @@ export function TrackCard({ track, priority = false }: TrackCardProps) {
               </span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </Link>
     </Magnetic>
   );

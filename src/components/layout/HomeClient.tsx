@@ -92,7 +92,13 @@ export function HomeClient({ tracks }: HomeClientProps) {
                 <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-emerald-500/10 blur-[120px]" />
               </div>
 
-              <div className="relative z-10 mx-auto max-w-7xl space-y-24">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="relative z-10 mx-auto max-w-7xl space-y-24"
+              >
                 <div className="space-y-4">
                   <h3 className="shade-title text-accent font-functional text-[10px] font-bold tracking-[0.5em] uppercase">
                     The Concept
@@ -115,20 +121,12 @@ export function HomeClient({ tracks }: HomeClientProps) {
                       Dropping 2026, it serves as a digital monolith to the journey of Nila — from
                       the valleys of Assam to the global digital frontier.
                     </p>
-                    {/* <Magnetic strength={0.2}>
-                      <Link
-                        href="/music"
-                        className="hover:bg-accent inline-flex h-16 items-center rounded-full bg-white px-12 text-[10px] font-bold tracking-[0.3em] text-black uppercase shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-all"
-                      >
-                        Explore the Archive
-                      </Link>
-                    </Magnetic> */}
                     <div className="pt-8">
                       <div className="h-px w-full bg-white/10" />
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </section>
 
             {/* Latest Releases - Infinite Marquee */}
@@ -173,7 +171,13 @@ export function HomeClient({ tracks }: HomeClientProps) {
             {/* Profile Section */}
             <section className="bg-background relative z-10 px-6 py-48">
               <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-24 md:grid-cols-2">
-                <div className="group relative aspect-4/5 overflow-hidden rounded-[40px] border border-white/10 shadow-2xl">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: 'easeOut' }}
+                  className="group relative aspect-4/5 overflow-hidden rounded-[40px] border border-white/10 shadow-2xl"
+                >
                   <Image
                     src="/extra/250519DSC_0023.webp"
                     alt="Artist Profile"
@@ -181,8 +185,14 @@ export function HomeClient({ tracks }: HomeClientProps) {
                     className="h-full w-full object-cover grayscale-0 md:grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0"
                   />
                   <div className="bg-accent/20 absolute inset-0 mix-blend-overlay transition-opacity group-hover:opacity-0" />
-                </div>
-                <div className="space-y-12">
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="space-y-12"
+                >
                   <div className="space-y-4">
                     <span className="text-accent text-[10px] font-bold tracking-[0.5em] uppercase">
                       Identity
@@ -203,7 +213,7 @@ export function HomeClient({ tracks }: HomeClientProps) {
                       Full Disclosure →
                     </Link>
                   </Magnetic>
-                </div>
+                </motion.div>
               </div>
             </section>
           </motion.div>

@@ -116,13 +116,24 @@ export function HeroPlayer({ track, onPlay, hasInteracted }: HeroPlayerProps) {
           ) : (
             <motion.div
               key="identity-reveal"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2 }}
               className="space-y-4 px-4 text-center translate-y-8 md:translate-y-12"
             >
               <h1 className="font-expressive text-6xl leading-tight tracking-normal text-white mix-blend-difference drop-shadow-2xl sm:text-7xl md:text-[10rem] lg:text-[12rem]">
-                NILXNJXN
+                {'NILXNJXN'.split('').map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.2 + i * 0.08,
+                      ease: [0.215, 0.61, 0.355, 1],
+                    }}
+                    className="inline-block"
+                  >
+                    {char}
+                  </motion.span>
+                ))}
               </h1>
             </motion.div>
           )}

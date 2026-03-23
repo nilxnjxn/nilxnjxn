@@ -70,7 +70,7 @@ export function ContactClient() {
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-muted-foreground font-functional text-[10px] font-bold tracking-[0.6em] uppercase"
+            className="text-muted-foreground font-functional mb-10 text-[10px] font-bold tracking-[0.6em] uppercase"
           >
             For bookings & collabs
           </motion.span>
@@ -78,7 +78,7 @@ export function ContactClient() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-expressive text-4xl leading-none tracking-normal md:text-6xl lg:text-[6.5rem]"
+            className="font-expressive text-lg leading-none tracking-normal md:text-2xl lg:text-[2.5rem]"
           >
             Contact
           </motion.h1>

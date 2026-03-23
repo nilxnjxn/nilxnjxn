@@ -59,7 +59,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: 'easeOut' }}
-              className="font-expressive text-4xl leading-[0.8] tracking-normal text-white md:text-[6rem]"
+              className="font-expressive mt-12 text-4xl leading-[0.8] tracking-normal text-white md:text-[6rem]"
             >
               Nilxnjxn
             </motion.h1>
@@ -123,7 +123,7 @@ export default function AboutPage() {
             transition={{ duration: 1, delay: 0.4 }}
             className="space-y-8 border-t border-white/5 pt-16"
           >
-            <h2 className="font-expressive text-3xl text-white">Direct Distribution</h2>
+            <h2 className="font-expressive mb-6 text-xl text-white">Direct &nbsp;&nbsp; Distribution</h2>
             <p className="text-muted-foreground font-functional max-w-2xl font-light">
               This space functions as a direct connection between the artist and the listener. By
               bypassing traditional streaming models, NILXNJXN ensures that the art remains pure and

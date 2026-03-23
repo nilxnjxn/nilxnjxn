@@ -11,7 +11,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 import { Magnetic } from '@/components/ui/Magnetic';
 import Image from 'next/image';
-import { LiveShowsSection } from '@/components/layout/LiveShowsSection';
+// import { LiveShowsSection } from '@/components/layout/LiveShowsSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,7 +47,7 @@ export function MusicClient({ tracks }: MusicClientProps) {
             <motion.h1
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              className="font-expressive text-6xl tracking-normal text-white md:text-8xl lg:text-9xl"
+              className="font-expressive text-4xl tracking-normal text-white md:text-6xl lg:text-7xl"
             >
               The Archive
             </motion.h1>
@@ -121,8 +121,8 @@ export function MusicClient({ tracks }: MusicClientProps) {
         </div>
       </div>
 
-      {/* Live Shows Section */}
-      <LiveShowsSection />
+      {/* Live Shows Section  */}
+      {/* <LiveShowsSection /> */}
 
       {/* Global Grain Overlay */}
       <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.04] mix-blend-overlay">

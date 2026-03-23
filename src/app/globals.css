@@ -158,6 +158,10 @@
     @apply font-sans;
   }
 
+  .font-expressive {
+    line-height: 1 !important;
+  }
+
   /* Custom Cursor Logic */
   @media (min-width: 1024px) {
     *,

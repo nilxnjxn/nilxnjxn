@@ -1,6 +1,6 @@
 import './globals.css';
-import { Inter, Permanent_Marker } from 'next/font/google';
-import localFont from 'next/font/local';
+import { Inter, Rock_Salt } from 'next/font/google';
+
 import { WaveformPlayer } from '@/components/player/WaveformPlayer';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -15,14 +15,15 @@ const functional = Inter({
   variable: '--font-functional',
 });
 
-const expressive = Permanent_Marker({
+const expressive = Rock_Salt({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-expressive',
 });
 
-const expressiveAlt = localFont({
-  src: './fonts/Comforter-Regular.ttf',
+const expressiveAlt = Rock_Salt({
+  weight: '400',
+  subsets: ['latin'],
   variable: '--font-expressive-alt',
 });
 

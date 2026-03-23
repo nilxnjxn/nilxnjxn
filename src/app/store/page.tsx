@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     "Secure, direct distribution for NILXNJXN's digital art and lossless audio. Direct artist-to-fan monetization.",
 };
 
+export const dynamic = 'force-static';
+export const revalidate = 3600;
+
 export default async function StorePage() {
   const tracks = await getTracks();
   return <StoreClient tracks={tracks} />;

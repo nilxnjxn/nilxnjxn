@@ -61,9 +61,11 @@ export function StoreClient({ tracks }: StoreClientProps) {
           {tracks.map((track) => (
             <div key={track.id} className="group flex w-full max-w-[340px] flex-col items-center space-y-8">
               <TrackCard track={track} />
-              <button className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-[10px] font-bold tracking-[0.3em] text-white uppercase shadow-xl transition-all hover:border-white/30 hover:bg-white hover:text-black active:scale-95">
-                Get Shade — {track.price}
-              </button>
+              <Link href={`/store/track/${track.slug}`} className="w-full">
+                <button className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-[10px] font-bold tracking-[0.3em] text-white uppercase shadow-xl transition-all hover:border-white/30 hover:bg-white hover:text-black active:scale-95">
+                  Get {track.season} — {track.price}
+                </button>
+              </Link>
             </div>
           ))}
         </div>

@@ -17,8 +17,12 @@ interface TrackDetailClientProps {
   track: Track;
 }
 
+import { ComingSoonWall } from '@/components/ui/ComingSoonWall';
+import { useState } from 'react';
+
 export function TrackDetailClient({ track }: TrackDetailClientProps) {
   const { currentTrack, isPlaying, playTrack, togglePlayPause } = useAudioStore();
+  const [showComingSoon, setShowComingSoon] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
@@ -172,10 +176,11 @@ export function TrackDetailClient({ track }: TrackDetailClientProps) {
                 <Button
                   variant="outline"
                   size="lg"
+                  onClick={() => setShowComingSoon(true)}
                   className="font-functional flex h-14 w-full items-center justify-center gap-3 rounded-full border-white/20 bg-transparent px-10 text-xs font-bold tracking-widest text-white uppercase shadow-[0_0_40px_rgba(255,255,255,0.05)] transition-all hover:bg-white hover:text-black sm:w-auto md:h-16 md:text-sm"
                 >
                   <HugeiconsIcon icon={ShoppingCart01Icon} size={18} className="text-current" />
-                  Unlock {track.price}
+                  Get {track.season} — {track.price}
                 </Button>
               </Magnetic>
             </div>
@@ -215,6 +220,16 @@ export function TrackDetailClient({ track }: TrackDetailClientProps) {
       <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.04] mix-blend-overlay">
         <Image src="/noise.png" alt="" fill className="h-full w-full object-cover" />
       </div>
+
+      <AnimatePresence>
+        {showComingSoon && (
+          <ComingSoonWall 
+            onClose={() => setShowComingSoon(false)} 
+            title={track.title}
+            season={track.season}
+          />
+        )}
+      </AnimatePresence>
     </main>
   );
 }

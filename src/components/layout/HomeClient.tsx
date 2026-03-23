@@ -103,7 +103,7 @@ export function HomeClient({ tracks }: HomeClientProps) {
                   <h3 className="shade-title text-accent font-functional text-[10px] font-bold tracking-[0.5em] uppercase">
                     The Concept
                   </h3>
-                  <h2 className="shade-title font-expressive text-3xl leading-tight tracking-normal text-white drop-shadow-2xl md:text-5xl">
+                  <h2 className="shade-title font-expressive mt-12 text-5xl leading-tight tracking-normal text-white drop-shadow-2xl md:text-7xl">
                     SHADES <br /> OF BEING.
                   </h2>
                 </div>

@@ -31,7 +31,7 @@ export async function sendContactEmail(formData: ContactFormData) {
     // Send notification to admin
     const { error: notificationError } = await resend.emails.send(
       {
-        from: 'NILXNJXN Contact <onboarding@resend.dev>',
+        from: 'NILXNJXN Contact <no-reply@nilxnjxn.com>',
         to: [process.env.NEXT_PUBLIC_CONTACT_EMAIL as string],
         subject: `New Message from ${name}`,
         html: generateContactNotificationEmail({ name, email, message }),
@@ -47,7 +47,7 @@ export async function sendContactEmail(formData: ContactFormData) {
     // Send confirmation to user
     const { error: confirmationError } = await resend.emails.send(
       {
-        from: 'NILXNJXN <onboarding@resend.dev>',
+        from: 'NILXNJXN <no-reply@nilxnjxn.com>',
         to: [email],
         subject: 'We Got Your Message',
         html: generateContactConfirmationEmail(name),

@@ -46,7 +46,7 @@ export async function subscribeNewsletter(formData: NewsletterFormData) {
     recordSubscription(email);
 
     const { error } = await resend.emails.send({
-      from: 'NILXNJXN Updates <onboarding@resend.dev>',
+      from: 'NILXNJXN Updates <no-reply@nilxnjxn.com>',
       to: [email],
       subject: 'Welcome to NILXNJXN Updates',
       html: `

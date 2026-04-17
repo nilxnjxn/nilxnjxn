@@ -12,6 +12,7 @@ export interface Track {
   duration?: string;
   slug?: string;
   season?: 'FRESH' | 'AKAD' | 'LATE';
+  album?: string;
 }
 
 // Simple in-memory cache for track data to improve TTFB
@@ -72,6 +73,7 @@ export async function getTracks(): Promise<Track[]> {
       price: '₹49',
       slug: rawTitle.toLowerCase(),
       season,
+      album: 'shades',
     };
   }).sort((a, b) => {
     const priority = { AKAD: 0, FRESH: 1, LATE: 2 };

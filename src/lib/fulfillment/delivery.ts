@@ -1,6 +1,7 @@
 import { S3Client, GetObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import { Resend } from "resend"
+import { getTracks } from "@/lib/data"
 
 const s3Client = new S3Client({
   region: "auto",
@@ -16,10 +17,14 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export async function generateDownloadLink(trackId: string): Promise<string> {
   const bucket = process.env.STORAGE_BUCKET_NAME || "AUDIO-FILES";
   
+  const tracks = await getTracks();
+  const resolvedTrack = tracks.find(t => t.id === trackId);
+  const albumFolder = (resolvedTrack?.album || "shades").toLowerCase();
+
   // Since audio can be .wav, .mp3, or a .zip of an album, we list objects to find the exact key
   const listCommand = new ListObjectsV2Command({
     Bucket: bucket,
-    Prefix: `audio/${trackId}.`, 
+    Prefix: `${albumFolder}/${trackId}.`, 
   });
 
   const listData = await s3Client.send(listCommand);

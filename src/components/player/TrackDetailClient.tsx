@@ -141,7 +141,7 @@ export function TrackDetailClient({ track }: TrackDetailClientProps) {
             <div className="reveal space-y-3">
               <motion.h1
                 className="font-expressive leading-tight tracking-normal text-white max-w-2xl wrap-break-word"
-                style={{ fontSize: 'clamp(48px, 12vw, 128px)' }}
+                style={{ fontSize: 'clamp(32px, 8vw, 74px)' }}
               >
                 {track.title}
               </motion.h1>

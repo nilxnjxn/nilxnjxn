@@ -17,6 +17,23 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export async function generateDownloadLink(trackId: string): Promise<string> {
   const bucket = process.env.STORAGE_BUCKET_NAME || "AUDIO-FILES";
   
+  // 0. Hardcoded Priority Mapping 
+  const hardcodedMapping: Record<string, string> = {
+    'akad': 'shades/AKAD_master-320kbps.mp3',
+    'fresh': 'shades/FRESH_master-320kpbs.mp3',
+    'trk_0': 'shades/AKAD_master-320kbps.mp3', // Map fallback ID for AKAD
+    'trk_1': 'shades/FRESH_master-320kpbs.mp3'  // Map fallback ID for FRESH
+  };
+
+  const normalizedId = trackId.toLowerCase();
+  if (hardcodedMapping[normalizedId]) {
+    const command = new GetObjectCommand({
+      Bucket: bucket,
+      Key: hardcodedMapping[normalizedId],
+    });
+    return await getSignedUrl(s3Client, command, { expiresIn: 7200 });
+  }
+
   // 1. Try exact key lookup from D1 catalog (preferred — no guessing)
   const catalogItem = await getCatalogItemById(trackId);
   if (catalogItem?.r2_download_key) {
